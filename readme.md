@@ -1,27 +1,12 @@
+# Important notes
+
 Building Go modules with nix flakes:
 https://nixos.org/manual/nixpkgs/stable/#sec-language-go
 
 vendorHash is set to `null` and `go mod vendor` was run.
 
-Inspect schema
-```shell
-atlas schema inspect -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable"
-```
-
-Dry-run apply schema
-```shell
-atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://schema.hcl" --dry-run
-```
-
-Starting postgres container
-```shell
-podman run --rm --name pg -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres:16.1
-```
-
-Interactive postgres
-```shell
-psql -h localhost -U postgres
-```
+# Command list
+Also see the justfile
 
 Inside `psql` run
 ```
