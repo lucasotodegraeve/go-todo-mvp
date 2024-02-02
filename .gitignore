@@ -27,10 +27,3 @@ result
 
 # Go workspace file
 go.work
-
-# End of https://www.toptal.com/developers/gitignore/api/direnv,go
-result
-result
-result
-
-vendor

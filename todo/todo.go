@@ -1,11 +1,12 @@
 package main
 
 import (
-	// "database/sql"
+	"database/sql"
+	_ "github.com/lib/pq"
+
 	"fmt"
-	// "log"
+	"log"
 	"strconv"
-	// _ "github.com/lib/pq"
 )
 
 type todoItem struct {
@@ -106,11 +107,10 @@ What would you like to do?
 }
 
 func main() {
-	// connStr := ""
-	// _, err := sql.Open("postgres", connStr)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// log.Println("Hello world")
-	cliLoop()
+	connStr := "user=postgres dbname=postgres sslmode=disable"
+	_, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Hello world")
 }
