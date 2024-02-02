@@ -5,11 +5,11 @@ table "items" {
     type = integer
     identity {
         generated = ALWAYS
-        start = 10
-        increment = 10
+        start = 0
+        increment = 1
     }
   }
-  column "complete" {
+  column "completed" {
     type = boolean
     default = false
   }
