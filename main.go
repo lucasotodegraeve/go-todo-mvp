@@ -167,6 +167,7 @@ func cliLoop(db *sql.DB) {
 			s := formatItem(item)
 			options = append(options, huh.NewOption(s, item.id))
 		}
+		options = append(options, huh.NewOption("Quit", -2))
 
 		form := huh.NewForm(
 			huh.NewGroup(
@@ -178,9 +179,12 @@ func cliLoop(db *sql.DB) {
 			log.Fatal(err)
 		}
 
-		if selected < 0 {
+		switch selected {
+		case -1:
 			addItem(db)
-		} else {
+		case -2:
+			return
+		default:
 			itemOptions(db, selected)
 		}
 	}
@@ -198,5 +202,4 @@ func connect() *sql.DB {
 func main() {
 	db := connect()
 	cliLoop(db)
-
 }
