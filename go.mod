@@ -1,4 +1,4 @@
-module todo
+module todo-mvp
 
 go 1.21.6
 

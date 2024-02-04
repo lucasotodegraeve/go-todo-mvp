@@ -10,15 +10,15 @@ alias sa := schema-apply
 
 # Build the Go module
 build:
-	go build todo/main.go
+	go build src/main.go
 
 # Run the Go module
 run:
-	go run todo/main.go
+	go run src/main.go
 
 # Watch `.go` files and recompile
 watch:
-	watchexec -e go -c clear go run todo/main.go
+	watchexec -e go -c clear go run src/main.go
 
 # Remove temporary and generated files
 clean:
