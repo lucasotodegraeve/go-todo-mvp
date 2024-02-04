@@ -28,5 +28,5 @@ result
 # Go workspace file
 go.work
 
-vendor
+# vendor
 main
