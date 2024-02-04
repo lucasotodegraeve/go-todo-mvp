@@ -22,8 +22,7 @@ watch:
 
 # Remove temporary and generated files
 clean:
-	rm main
-	rm result
+	rm -f main result
 
 # Inspect the database schema
 schema-inspect:
