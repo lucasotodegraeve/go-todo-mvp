@@ -23,6 +23,7 @@ watch:
 # Remove temporary and generated files
 clean:
 	rm main
+	rm result
 
 # Inspect the database schema
 schema-inspect:
@@ -30,7 +31,7 @@ schema-inspect:
 
 # Apply the database schema
 schema-apply apply="false":
-	atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://schema.hcl" {{ if apply == "true" {""} else {"--dry-run"} }}
+	atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://persistance/schema.hcl" {{ if apply == "true" {""} else {"--dry-run"} }}
 
 # Start new postgres container
 postgres:
