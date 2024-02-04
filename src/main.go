@@ -4,7 +4,7 @@ import (
 	"github.com/charmbracelet/huh"
 	"log"
 
-	"todo-mvp/persistance"
+	// "todo-mvp/persistance"
 
 	"database/sql"
 	_ "github.com/lib/pq"
@@ -19,23 +19,6 @@ const (
 	toggle_item
 )
 
-// type todoItem struct {
-// 	id        int
-// 	completed bool
-// 	name      string
-// }
-
-// type todoList struct {
-// 	items []todoItem
-// }
-
-// func (list *todoList) add(item todoItem) {
-// 	list.items = append(list.items, item)
-// }
-
-// func addItem(db *sql.DB) {
-// }
-
 // Adds an item to the postgres database.
 // By default the item is not marked as completed an is called name.
 func addItemDB(db *sql.DB, name string) {
@@ -44,38 +27,6 @@ func addItemDB(db *sql.DB, name string) {
 		log.Fatal(err)
 	}
 }
-
-// func getValidIndex(list *todoList) int {
-// 	var input string
-// 	fmt.Print(">> ")
-// 	var index int
-// 	var err error
-// 	for {
-// 		fmt.Scanf("%s", &input)
-// 		index, err = strconv.Atoi(input)
-// 		if err != nil || index < 0 || index >= len(list.items) {
-// 			fmt.Print("Please enter a valid number.\n>> ")
-// 			continue
-// 		}
-// 		break
-// 	}
-// 	return index
-// }
-
-// func handleRemove(list *todoList) {
-// 	fmt.Println("What item would like to delete?")
-// 	list.show()
-// 	index := getValidIndex(list)
-// 	list.items = append(list.items[:index], list.items[index+1:]...)
-// }
-
-// func handleComplete(list *todoList) {
-// 	fmt.Println("What item would you like to mark as completed?")
-// 	list.show()
-// 	index := getValidIndex(list)
-// 	list.items[index].completed = true
-
-// }
 
 func cliLoop(db *sql.DB) {
 	var selected action
@@ -113,35 +64,8 @@ func connect() *sql.DB {
 	return db
 }
 
-// func init_list(db *sql.DB) todoList {
-// 	list := todoList{}
-// 	rows, err := db.Query("SELECT * FROM items")
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	defer rows.Close()
-
-// 	for rows.Next() {
-// 		var id int
-// 		var completed bool
-// 		var name string
-
-// 		if err := rows.Scan(&id, &completed, &name); err != nil {
-// 			log.Fatal(err)
-// 		}
-
-// 		item := todoItem{id, completed, name}
-// 		list.add(item)
-// 	}
-// 	return list
-// }
-
 func main() {
 
 	db := connect()
-	// model := model{
-	// 	list: init_list(db),
-	// 	db:   db,
-	// }
 	cliLoop(db)
 }
