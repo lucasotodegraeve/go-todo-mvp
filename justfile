@@ -29,12 +29,14 @@ schema-inspect:
 	atlas schema inspect -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable"
 
 # Apply the database schema
-schema-apply apply="false":
-	atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://schema.hcl" {{ if apply == "true" {""} else {"--dry-run"} }}
+schema-apply apply="false" auto-approve="false":
+	atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://schema.hcl" {{ if apply == "true" {""} else {"--dry-run"} }} {{ if auto-approve == "true" {"--auto-approve"} else {""} }}
 
 # Start new postgres container
 postgres:
 	podman run --rm --name pg -p 5432:5432 --env POSTGRES_PASSWORD=admin --detach postgres:16.1
+	sleep 1
+	just schema-apply true true
 
 # List running containers
 ps:
