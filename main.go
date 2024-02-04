@@ -4,8 +4,6 @@ import (
 	"github.com/charmbracelet/huh"
 	"log"
 
-	// "todo-mvp/persistance"
-
 	"database/sql"
 	_ "github.com/lib/pq"
 )
@@ -19,8 +17,6 @@ const (
 	toggle_item
 )
 
-// Adds an item to the postgres database.
-// By default the item is not marked as completed an is called name.
 func addItemDB(db *sql.DB, name string) {
 	_, err := db.Query("INSERT INTO items (completed, name) values ($1, $2)", false, name)
 	if err != nil {
@@ -65,7 +61,6 @@ func connect() *sql.DB {
 }
 
 func main() {
-
 	db := connect()
 	cliLoop(db)
 }

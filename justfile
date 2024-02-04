@@ -10,15 +10,15 @@ alias sa := schema-apply
 
 # Build the Go module
 build:
-	go build src/main.go
+	go build main.go
 
 # Run the Go module
 run:
-	go run src/main.go
+	go run main.go
 
 # Watch `.go` files and recompile
 watch:
-	watchexec -e go -c clear go run src/main.go
+	watchexec -e go -c clear go run main.go
 
 # Remove temporary and generated files
 clean:
@@ -30,7 +30,7 @@ schema-inspect:
 
 # Apply the database schema
 schema-apply apply="false":
-	atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://persistance/schema.hcl" {{ if apply == "true" {""} else {"--dry-run"} }}
+	atlas schema apply -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable" --to "file://schema.hcl" {{ if apply == "true" {""} else {"--dry-run"} }}
 
 # Start new postgres container
 postgres:
