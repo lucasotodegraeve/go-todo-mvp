@@ -26,7 +26,7 @@
         pname = "Todo-list";
         version = "0.0.1";
         src = self;
-        vendorHash = null;
+        vendorHash = "sha256-xkJBM2rhlp6HIoQXxUQO10tUcj8+FHMVC9OUeysBGKA=";
       };
       postgres = dockerTools.pullImage {
         imageName = "postgres";
