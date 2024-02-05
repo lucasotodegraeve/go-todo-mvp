@@ -24,6 +24,11 @@ watch:
 clean:
 	rm -f main result
 
+# Clean files in the home folder
+clean-global: clean
+	rm -f ~/.psql_history 
+	rm -rf ~/.atlas/
+
 # Inspect the database schema
 schema-inspect:
 	atlas schema inspect -u "postgres://postgres:admin@localhost:5432/postgres?sslmode=disable"
