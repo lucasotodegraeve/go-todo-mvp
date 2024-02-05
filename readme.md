@@ -1,21 +1,61 @@
-# Important notes
+# To-do MVP
 
-Building Go modules with nix flakes:
-https://nixos.org/manual/nixpkgs/stable/#sec-language-go
+This app constists out of a CLI interface written in Go and a PostgreSQL database to store the items.
 
-vendorHash is set to `null` and `go mod vendor` was run.
+The following technologies where used:
+- [Go](https://go.dev/)
+- [Atlas](https://atlasgo.io/)
+- [Nix & Nix Flakes](https://nixos.org/)
+- [Podman](https://podman.io/)
 
-# Command list
-Also see the justfile
+## Setup
 
-Inside `psql` run
-```
-SELECT current_database();
-```
-default is `postgres`
+First build/pull the container image using Nix
 
-
-Creating a new database
 ```shell
-podman exec -u postgres pg createdb mydb
+nix build .#postgres
 ```
+
+Load the image into Docker/Podman. In [Nushell](https://www.nushell.sh/) this looks like
+
+```shell
+open result | podman load
+```
+or in Bash
+```shell
+podman load < result
+```
+
+Start the database using the justfile. This will first start the conainer
+and will then use Atlas to apply the schema to the database.
+
+```shell
+just postgres
+```
+
+The database schema is managed with [Atlas](https://atlasgo.io/) and can be viewed in `schema.hcl`.
+There is only a one table with the columns: `id`, `completed` and `name`
+
+To directly interact with the database run the command bellow.
+The password for the `postgres` user is `admin`. (You can exit `psql` with ctrl+D)
+```shell
+just psql
+```
+
+To build the Go app
+```shell
+nix build
+```
+
+Run it with
+```shell
+./result/bin/go-todo-mvp
+```
+
+Atlas and psql generate files in the home directory. Clean them up using
+```
+just clean-global
+```
+
+See the `justfile` other commonly used commands.
+
