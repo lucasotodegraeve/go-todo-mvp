@@ -1,4 +1,5 @@
 # To-do MVP
+Read about it on [my blog](https://lucasotodegraeve.github.io/posts/2024/go-todo-mvp/)
 
 This app constists out of a CLI interface written in Go and a PostgreSQL database to store the items.
 
